@@ -248,7 +248,7 @@ jobs:
           
           if [[ "$CPU" == "sm8650" ]]; then
             cd kernel_workspace
-            ./kernel_platform/build_with_bazel.py -t "$CPUD" gki
+            LTO=thin ./kernel_platform/build_with_bazel.py -t "$CPUD" gki
           fi
 
       - name: 后备构建内核
