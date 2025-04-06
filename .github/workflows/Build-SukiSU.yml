@@ -104,7 +104,7 @@ jobs:
           echo "CPU: ${{ github.event.inputs.CPU }}"
           echo "FEIL: ${{ github.event.inputs.FEIL }}"
           repo init -u https://github.com/OnePlusOSS/kernel_manifest.git -b oneplus/$CPU -m $FEIL.xml --depth=1
-          repo sync
+          repo sync -c --no-clone-bundle --optimized-fetch --prune --force-sync -j$(nproc --all)
           rm kernel_platform/common/android/abi_gki_protected_exports_* || echo "No protected exports!"
           rm kernel_platform/msm-kernel/android/abi_gki_protected_exports_* || echo "No protected exports!"
           sed -i 's/ -dirty//g' kernel_platform/common/scripts/setlocalversion
@@ -248,7 +248,7 @@ jobs:
           
           if [[ "$CPU" == "sm8650" ]]; then
             cd kernel_workspace
-            LTO=thin ./kernel_platform/build_with_bazel.py -t "$CPUD" gki
+            LTO=thin ./kernel_platform/oplus/build/oplus_build_kernel.sh "$CPUD" gki
           fi
 
       - name: 后备构建内核
