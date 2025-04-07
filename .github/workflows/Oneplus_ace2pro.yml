@@ -304,7 +304,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: "build-${{ github.run_id }}"
-          name: "OnePlus_ACE5 Build ${{ github.run_number }}"
+          name: "OnePlus_ACE2 PRO Build ${{ github.run_number }}"
           body: |
             每日自动编译一加系列 SukiSU_MKSU_SUSFS_VFS 内核
             - 机型： 一加ACE2PRO
