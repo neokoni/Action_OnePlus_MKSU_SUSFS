@@ -105,8 +105,8 @@ jobs:
           echo "FEIL: ${{ github.event.inputs.FEIL }}"
           repo init -u https://github.com/OnePlusOSS/kernel_manifest.git -b oneplus/$CPU -m $FEIL.xml --depth=1
           repo sync -c --no-clone-bundle --optimized-fetch --prune --force-sync -j$(nproc --all)
-          rm kernel_platform/common/android/abi_gki_protected_exports_* || echo "No protected exports!"
-          rm kernel_platform/msm-kernel/android/abi_gki_protected_exports_* || echo "No protected exports!"
+          rm -rf kernel_platform/common/android/abi_gki_protected_exports_*
+          rm -rf  kernel_platform/msm-kernel/android/abi_gki_protected_exports_*
           sed -i 's/ -dirty//g' kernel_platform/common/scripts/setlocalversion
           sed -i 's/ -dirty//g' kernel_platform/msm-kernel/scripts/setlocalversion
           sed -i 's/ -dirty//g' external/dtc/scripts/setlocalversion
