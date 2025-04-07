@@ -60,8 +60,6 @@ on:
           - 启用
           - 忽略
         default: 启用
-  schedule:
-    - cron: '0 23 * * *'  # UTC时间23点（北京时间次日7点）
 
 env:
   RETENTION_COUNT: 7  # 保留的发布版本数量
