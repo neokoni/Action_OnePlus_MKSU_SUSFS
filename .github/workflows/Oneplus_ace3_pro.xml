@@ -248,13 +248,10 @@ jobs:
           CPU="${{ github.event.inputs.CPU || 'sm8650' }}"
           CPUD="${{ github.event.inputs.CPUD || 'pineapple' }}"
           
-          if [[ "$CPU" == "sm8550" ]]; then
+          if [[ "$CPU" == "sm8650" ]]; then
             cd kernel_workspace
             export LTO=thin
-            #./kernel_platform/oplus/build/oplus_build_kernel.sh ${{ github.event.inputs.CPUD }} gki
-            ./kernel_platform/build_with_bazel.py \
-               -t pineapple \
-               gki \
+            ./kernel_platform/build_with_bazel.py -t pineapple gki
           fi
 
       - name: 制作 AnyKernel3
@@ -268,7 +265,7 @@ jobs:
 
       - name: 打包 AnyKernel3 (ZIP)
         run: |
-          FEIL="${{ github.event.inputs.FEIL || 'oneplus_ace3_pr' }}"
+          FEIL="${{ github.event.inputs.FEIL || 'oneplus_ace3_pro' }}"
           cd AnyKernel3
           zip -r ../AnyKernel3_KernelSU_${{ env.KSUVER }}_$FEIL.zip ./*
           cd ..
@@ -276,7 +273,7 @@ jobs:
 
       - name: 打包原始镜像 (ZIP)
         run: |
-          FEIL="${{ github.event.inputs.FEIL || 'oneplus_ace5' }}"
+          FEIL="${{ github.event.inputs.FEIL || 'oneplus_ace3_pro' }}"
           zip -r Image_KernelSU_${{ env.KSUVER }}_$FEIL.zip ./kernel_workspace/init_boot.img
 
       - name: 上传 ZIP 工件
